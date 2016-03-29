@@ -1,0 +1,25 @@
+﻿{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "jsx": "react",
+        "moduleResolution": "node",
+        "declaration": false,
+        "sourceMap": false,
+        "noLib": false
+    },
+    "exclude": [
+        "node_modules",
+        "bower_components",
+        "typings/main.d.ts",
+        "typings/browser.d.ts",
+        "typings/tsd.d.ts",
+        "typings/main",
+        "src/scss/**/*"        
+    ],
+    "filesGlob": [
+        "./src/**/*.ts",
+        "!./node_modules/**/*.ts",
+        "!./bower_components/**/*.ts"
+    ]
+}

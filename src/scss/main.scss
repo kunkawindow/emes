@@ -1,0 +1,464 @@
+﻿@import "./_palette.scss";
+
+$background: $color-secondary-2-0;
+$lines: $color-secondary-2-2;
+$text: $color-secondary-1-3;
+$backItem: $color-secondary-2-3;
+$activeBackground: $color-secondary-2-4;
+$action: $color-primary-1;
+$actionHover: $color-primary-1 * 1.25;
+$actionActive: $color-primary-2;
+$shadow: rgba(0, 0, 0, 0.6);
+$userWhite: #292;
+$userBan: #a00;
+$userWindow: #fa0;
+$userNoname: #eee;
+$userQuarantine: ($userWindow + $userBan) / 2;
+$selection: $color-secondary-1-4;
+
+@-moz-keyframes pulse-banned {
+    from {
+        background-color: $userBan;
+    }
+
+    to {
+        background-color: $userBan * 1.5;
+    }
+}
+
+@-webkit-keyframes pulse-banned {
+    from {
+        background-color: $userBan;
+    }
+
+    to {
+        background-color: $userBan * 1.5;
+    }
+}
+
+@keyframes pulse-banned {
+    from {
+        background-color: $userBan;
+    }
+
+    to {
+        background-color: $userBan * 1.5;
+    }
+}
+
+.emes-root {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 0;
+    overflow: visible;
+    z-index: 1000;
+    font-family: Verdana, Arial;
+    font-size: 12px;
+}
+
+.emes-sub-root {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 0;
+    overflow: visible;
+}
+
+.emes-notepad {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    background-color: $background;
+    border: solid 1px $lines;
+    padding: 10px;
+    box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+
+    &-title {
+        color: $text;
+        margin-bottom: 3px;
+        text-align: center;
+    }
+
+    .io-textarea {
+        border-radius: 3px;
+        color: $text;
+        background-color: $activeBackground;
+        min-width: 150px;
+        min-height: 300px;
+        max-width: 80vw;
+        max-height: 90vh;
+        height: auto;
+        border: solid 1px $lines;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+
+        &::selection {
+            background: $selection;
+        }
+
+        &::-moz-selection {
+            background: $selection;
+        }
+
+        &:focus {
+            color: $action;
+        }
+    }
+}
+
+.emes-banmenu {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: $background;
+    border: solid 1px $lines;
+    padding: 10px;
+    box-shadow: 0 2px 5px 2px $shadow;
+    border-radius: 5px;
+
+    &.expanded {
+        min-width: 260px;
+    }
+
+    .text {
+        color: $text;
+    }
+
+    .window-content {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: solid 1px $lines;
+
+        &.window-content-active {
+            height: 240px;
+            overflow: hidden;
+            background-color: $activeBackground;
+
+            &.noscroll {
+                height: auto;
+                min-height: 240px;
+            }
+
+            .scroll-vp {
+                overflow: auto;
+                max-height: 100%;
+                margin-right: -100px;
+                padding-right: 80px;
+            }
+        }
+    }
+
+    .import-input,
+    .user-input {
+        margin-bottom: 10px;
+        white-space: nowrap;
+
+        input, button {
+            height: 30px;
+            line-height: 30px;
+            vertical-align: middle;
+        }
+
+        input {
+            border: 0;
+            color: $action;
+            background-color: transparent;
+            border-bottom: solid 1px $lines;
+            padding: 5px;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            min-width: 200px;
+
+            &:focus {
+                color: $actionHover;
+            }
+        }
+    }
+
+    .list-item {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        background-color: $backItem;
+        color: $text;
+        height: 25px;
+        margin-bottom: 1px;
+        padding-left: 2px;
+        padding-right: 2px;
+        cursor: pointer;
+        line-height: 25px;
+
+        &:hover {
+            color: $action;
+        }
+
+        .material-icons {
+            font-size: 25px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        .list-item-text {
+            vertical-align: middle;
+        }
+    }
+
+    .import-input {
+        text-align: right;
+    }
+
+    .io-textarea {
+        color: $text;
+        background-color: transparent;
+        min-width: 260px;
+        min-height: 30vh;
+        max-width: 80vw;
+        max-height: 70vh;
+        height: auto;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+
+        &::selection {
+            background: $selection;
+        }
+
+        &::-moz-selection {
+            background: $selection;
+        }
+
+        &:focus {
+            color: $action;
+        }
+    }
+
+    button {
+        padding: 0;
+        margin: 0;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: $lines;
+        min-width: 30px;
+
+        &.active-tab-button {
+            color: $action;
+        }
+
+        &:hover {
+            color: $action;
+        }
+
+        &:active {
+            color: $actionActive;
+        }
+    }
+
+    &-user-controls {
+        text-align: left;
+
+        .tabs {
+            overflow: hidden;
+        }
+
+        .expand {
+            float: right;
+        }
+    }
+}
+
+.material-checkbox {
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    color: $action;
+    cursor: pointer;
+
+    &:hover {
+        color: $actionHover;
+    }
+
+    .checked, .unchecked {
+        margin: 0 5px;
+    }
+
+    label, span {
+        line-height: 25px;
+        vertical-align: top;
+        cursor: pointer;
+    }
+
+    input {
+        display: none;
+
+        & ~ .checked {
+            display: none;
+        }
+
+        & ~ .unchecked {
+            display: inline-block;
+        }
+
+        &:checked ~ .checked {
+            display: inline-block;
+        }
+
+        &:checked ~ .unchecked {
+            display: none;
+        }
+    }
+}
+
+[emes-user] {
+    position: relative;
+    margin-bottom: 2px !important;
+
+    &:hover {
+        &::after {
+            background-color: black;
+            border-radius: 3px;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            text-align: center;
+            left: 3px;
+            margin-top: 3px;
+            overflow: hidden;
+            padding: 2px;
+            position: absolute;
+            right: 3px;
+            top: 100%;
+            z-index: 1;
+        }
+    }
+
+    .username {
+        color: white !important;
+
+        &.grey {
+            text-decoration: line-through;
+        }
+    }
+
+    .user_inner_li:hover {
+        background-color: transparent !important;
+    }
+}
+
+[emes-user="white"] {
+    background-color: $userWhite;
+
+    &:hover {
+        background-color: $userWhite - #333;
+
+        &::after {
+            color: $userWhite * 1.5;
+            content: "Whitelisted";
+        }
+    }
+}
+
+[emes-user="banned"] {
+    background-color: $userBan;
+    -moz-animation: pulse-banned 0.5s infinite alternate;
+    -o-animation: pulse-banned 0.5s infinite alternate;
+    -webkit-animation: pulse-banned 0.5s infinite alternate;
+    animation: pulse-banned 0.5s infinite alternate;
+
+    &:hover {
+        background-color: $userBan - #333;
+
+        &::after {
+            color: $userBan * 1.5;
+            content: "Banned";
+        }
+    }
+}
+
+[emes-user="quarantine"] {
+    background-color: $userQuarantine;
+
+    &:hover {
+        background-color: $userQuarantine - #333;
+
+        &::after {
+            color: $userQuarantine * 1.5;
+            content: "Quarantine";
+        }
+    }
+}
+
+[emes-user="window"] {
+    background-color: $userWindow;
+
+    &:hover {
+        background-color: $userWindow - #333;
+
+        &::after {
+            color: $userWindow * 1.5;
+            content: "Window";
+        }
+    }
+}
+
+[emes-user="noname"] {
+    background-color: $userNoname;
+
+    .username {
+        color: black !important;
+    }
+
+    &:hover {
+        background-color: $userNoname - #666;
+
+        .username {
+            color: white !important;
+        }
+
+        &::after {
+            display: none;
+        }
+    }
+}
+
+input::-ms-clear {
+    display: none;
+}
+
+button, input, textarea {
+    &:focus {
+        outline: 0;
+    }
+}
+
+#content[emes-stylefix="true"] {
+    width: 1300px;
+
+    #game_container {
+        width: 1260px;
+
+        .userbox {
+            width: 240px;
+        }
+
+        .screen .form_lastwill textarea {
+            background-image: none !important;
+            background-color: $userNoname !important;
+        }
+        /*#countdown {
+            display: inline-block !important;
+        }*/
+        #countcont {
+            float: right;
+            margin-right: 110px;
+            margin-top: 6px;
+        }
+    }
+}

@@ -1,0 +1,8 @@
+﻿//
+// ==UserScript==
+// @name Epicmafia extention scripts
+// @namespace epicmafia.com
+// @author kunka (epicmafia.com/user/546554)
+// @version 0.1.0
+// @include https://epicmafia.com/game/*
+// ==/UserScript==
